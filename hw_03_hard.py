@@ -1,6 +1,6 @@
-#HARD
+# HARD
 
-#Задание-1
+        #Задание-1
 
 #Написать консольное меню вида:
 
@@ -17,22 +17,39 @@
 #г) Программа не должна завершаться пока не введется команда Выйти
 #д) Проверять на ввод ошибочных данных, там где они могут появиться
 
-print('==Меню==')
-print('1. Добавить')
-print('2. Удалить')
-print('3. Распечатать')
-print('4. Посчитать')
-print('5. Выйти')
+def append():
+    print('добавил')
 
-i = 0
-N = 5 #количество пунктов меню
-while i != N:
-    i = input('Введите номер пункта меню: ')
-    if not(isinstance(i, int)):
-        print('ошибка! вводить надо число. попробуйте еще раз')
-        continue
-    elif i<1 or i>5:
-        print('нет такого пунка меню. в меню всего', N, 'пунктов')
-        continue
-    break
+def delete():
+    print('удалил')
 
+def print_my():
+    print('напечатал')
+
+def calculate_my():
+    print('вычислил')
+
+def exit_my():
+    print('выход')
+
+point_menu = [['Добавить', append],
+    ['Удалить', delete],
+    ['Распечатать', print_my],
+    ['Вычислить', calculate_my],
+    ['Выйти', exit_my]
+]
+
+print("==Меню==")
+for i in range(len(point_menu)):
+    print(f"{i+1}. ", point_menu[i][0])
+
+answer = ''
+
+while answer != str(len(point_menu)):
+    answer = input('Ведите номер пункта меню: ')
+    if answer=='0' or len(answer) > 1 or answer.isalpha():
+        print('Неправильный ввод данных. номер пункта меню от 1 до', len(point_menu))
+    else:
+        for i in range(len(point_menu)):
+            if answer == str(i+1):
+                point_menu[i][1]()
